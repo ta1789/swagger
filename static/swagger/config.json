@@ -1,0 +1,233 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Flask API",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    },
+    {
+      "url": "http://127.0.0.1:5000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "house",
+      "description": "CRUD Operations for Houses"
+    }
+  ],
+  "paths": {
+    "/houses": {
+      "get": {
+        "tags": [
+          "house"
+        ],
+        "summary": "Retrieve all houses",
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/house"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "house"
+        ],
+        "summary": "Create a house",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/house"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/houses/{id}": {
+      "get": {
+        "tags": [
+          "house"
+        ],
+        "summary": "Retrieve a specific house",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "description": "ID of the house to retrieve"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/house"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "House not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "house"
+        ],
+        "summary": "Update a house",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "description": "ID of the house to update"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/house"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "House not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "house"
+        ],
+        "summary": "Delete a house",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "description": "ID of the house to delete"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully"
+          },
+          "404": {
+            "description": "House not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "house": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1
+          },
+          "SalePrice": {
+            "type": "integer",
+            "example": 402043
+          },
+          "OverAllQual": {
+            "type": "integer",
+            "example": 10
+          },
+          "TotalBsmtSF": {
+            "type": "integer",
+            "example": 200
+          },
+          "GrLivArea": {
+            "type": "integer",
+            "example": 50
+          },
+          "BsmtFullBath": {
+            "type": "integer",
+            "example": 2
+          },
+          "GarageCars": {
+            "type": "integer",
+            "example": 1
+          },
+          "YearBuilt": {
+            "type": "integer",
+            "example": 1989
+          },
+          "MasVerArea": {
+            "type": "integer",
+            "example": 100
+          }
+        }
+      }
+    }
+  }
+}
